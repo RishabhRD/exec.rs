@@ -1,3 +1,3 @@
 # exec.rs
 
-Rust port of P2300.
+Rust port of C++'s P2300 proposal of senders/receiver library.
