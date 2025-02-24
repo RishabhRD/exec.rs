@@ -3,7 +3,7 @@
 
 use crate::Sender;
 
-/// Perform a blocking wait on `sender`.
+/// Perform a blocking wait on `sender` and return result of its computation.
 ///
 /// Returns the result of task `res` such that:
 ///   - if res == None, then task was cancelled.
