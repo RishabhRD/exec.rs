@@ -16,6 +16,7 @@ where
     }
 }
 
+#[derive(Clone)]
 pub struct JustCancelledSender {}
 
 impl Sender for JustCancelledSender {

@@ -17,6 +17,7 @@ where
     }
 }
 
+#[derive(Clone)]
 pub struct JustSender<Value> {
     value: Value,
 }

@@ -19,7 +19,7 @@ where
     }
 }
 
-#[doc(hidden)]
+#[derive(Clone)]
 pub struct InlineSender {}
 
 impl Sender for InlineSender {
