@@ -8,3 +8,7 @@ Major entities:
 2. Receiver
 3. Scheduler
 4. Operation State
+
+## API Documentation
+
+View API Documentation at [docs](https://rishabhrd.github.io/exec.rs).
