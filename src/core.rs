@@ -49,9 +49,12 @@ pub trait Sender {
     /// Type of error with which task can be completed.
     type Error;
 
+    /// Type of operation state when Sender is connected with compatible receiver.
+    type OperationState;
+
     /// Connects sender with receiver to produce executable task represented
     /// by operation state.
-    fn connect<R>(self, receiver: R) -> impl OperationState
+    fn connect<R>(self, receiver: R) -> Self::OperationState
     where
         R: Receiver<Value = Self::Value, Error = Self::Error>;
 }
