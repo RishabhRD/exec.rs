@@ -49,7 +49,7 @@ pub trait Sender {
 }
 
 /// Represents handle to execution context.
-pub trait Scheduler {
+pub trait Scheduler: Clone {
     /// Type of sender obtained from schedule opertaion.
     type ScheduleSender: Sender;
 
