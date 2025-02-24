@@ -50,6 +50,9 @@ pub trait Sender {
 
 /// Represents handle to execution context.
 pub trait Scheduler {
+    /// Type of sender obtained from schedule opertaion.
+    type ScheduleSender;
+
     /// Returns a sender that represent task scheduled on scheduler.
-    fn schedule(&mut self) -> impl Sender;
+    fn schedule(&mut self) -> Self::ScheduleSender;
 }

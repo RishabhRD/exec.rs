@@ -19,7 +19,8 @@ where
     }
 }
 
-struct InlineSender {}
+#[doc(hidden)]
+pub struct InlineSender {}
 
 impl Sender for InlineSender {
     type Value = ();
@@ -38,7 +39,9 @@ impl Sender for InlineSender {
 pub struct InlineScheduler {}
 
 impl Scheduler for InlineScheduler {
-    fn schedule(&mut self) -> impl Sender {
+    type ScheduleSender = InlineSender;
+
+    fn schedule(&mut self) -> Self::ScheduleSender {
         InlineSender {}
     }
 }
