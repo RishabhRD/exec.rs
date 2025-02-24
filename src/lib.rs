@@ -6,4 +6,9 @@ pub mod core;
 #[doc(inline)]
 pub use core::*;
 
+#[doc(hidden)]
+pub mod sync_wait;
+#[doc(inline)]
+pub use sync_wait::*;
+
 pub mod schedulers;
