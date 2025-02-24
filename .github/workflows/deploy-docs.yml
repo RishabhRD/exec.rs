@@ -1,0 +1,37 @@
+name: Deploy exec.rs Docs
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy-docs:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+
+      - name: Generate documentation
+        run: cargo doc --no-deps
+
+      - name: Generate index.html file
+        run: |
+          echo "<meta http-equiv=refresh content=0;url=exec/index.html>" > target/doc/index.html
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./target/doc
+          force_orphan: true
+          publish_branch: gh-pages
