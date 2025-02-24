@@ -1,14 +1,5 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
-}
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2024 Rishabh Dwivedi (rishabhdwivedi17@gmail.com)
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
-}
+pub mod core;
+pub use core::*;
