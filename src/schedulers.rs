@@ -4,4 +4,4 @@
 #[doc(hidden)]
 pub mod inline_scheduler;
 #[doc(inline)]
-pub use inline_scheduler::*;
+pub use inline_scheduler::InlineScheduler;
