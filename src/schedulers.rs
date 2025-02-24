@@ -2,3 +2,4 @@
 // Copyright (c) 2025 Rishabh Dwivedi (rishabhdwivedi17@gmail.com)
 
 pub mod inline_scheduler;
+pub use inline_scheduler::*;
