@@ -27,4 +27,9 @@ pub mod sync_wait;
 #[doc(inline)]
 pub use sync_wait::*;
 
+#[doc(hidden)]
+pub mod factory;
+#[doc(inline)]
+pub use factory::*;
+
 pub mod schedulers;
