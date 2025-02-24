@@ -3,13 +3,13 @@
 
 #[cfg(test)]
 pub mod tests {
-    use exec::*;
+    use exec::Scheduler;
 
     #[test]
     fn sync_wait_with_schedule() {
-        let mut sch = schedulers::InlineScheduler {};
+        let mut sch = exec::InlineScheduler {};
         let work = sch.schedule();
-        let res = sync_wait(work);
+        let res = exec::sync_wait(work);
         assert!(res == Some(Ok(())));
     }
 }
