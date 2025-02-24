@@ -5,3 +5,8 @@
 pub mod just;
 #[doc(inline)]
 pub use just::just;
+
+#[doc(hidden)]
+pub mod just_error;
+#[doc(inline)]
+pub use just_error::just_error;
