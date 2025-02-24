@@ -31,6 +31,7 @@ impl Sender for JustCancelledSender {
     }
 }
 
+/// Returns a sender, that completes on current context with indicating cancellation.
 pub fn just_cancelled() -> JustCancelledSender {
     JustCancelledSender {}
 }

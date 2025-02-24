@@ -37,6 +37,7 @@ impl<Value> Sender for JustSender<Value> {
     }
 }
 
+/// Returns a sender, that completes on current context with given value.
 pub fn just<Value>(value: Value) -> JustSender<Value> {
     JustSender { value }
 }

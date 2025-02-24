@@ -37,6 +37,7 @@ impl<Error> Sender for JustErrorSender<Error> {
     }
 }
 
+/// Returns a sender, that completes on current context with given error.
 pub fn just_error<Error>(error: Error) -> JustErrorSender<Error> {
     JustErrorSender { error }
 }
