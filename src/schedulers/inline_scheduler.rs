@@ -34,6 +34,7 @@ impl Sender for InlineSender {
     }
 }
 
+/// Scheduler that schedules task on current thread.
 pub struct InlineScheduler {}
 
 impl Scheduler for InlineScheduler {
