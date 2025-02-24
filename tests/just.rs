@@ -16,4 +16,11 @@ pub mod tests {
         let res = exec::sync_wait(work);
         assert_eq!(res, Some(Err(2)));
     }
+
+    #[test]
+    fn just_cancelled() {
+        let work = exec::just_cancelled();
+        let res = exec::sync_wait(work);
+        assert_eq!(res, None);
+    }
 }

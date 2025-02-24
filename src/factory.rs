@@ -10,3 +10,8 @@ pub use just::just;
 pub mod just_error;
 #[doc(inline)]
 pub use just_error::just_error;
+
+#[doc(hidden)]
+pub mod just_cancelled;
+#[doc(inline)]
+pub use just_cancelled::just_cancelled;
