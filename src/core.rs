@@ -7,10 +7,12 @@
 //! An asynchronous task is a function whose operation would be completed in
 //! future.
 //!
+//! ```text
 //!  ------------------------
 //! | Sender -----> Receiver |
 //!  ------------------------
 //!     Operation State
+//! ```
 //!
 //! The above diagram shows the model for async task.
 
