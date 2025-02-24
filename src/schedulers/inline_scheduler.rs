@@ -20,7 +20,6 @@ where
 }
 
 #[doc(hidden)]
-#[derive(Clone)]
 pub struct InlineSender {}
 
 impl Sender for InlineSender {
@@ -37,6 +36,7 @@ impl Sender for InlineSender {
 }
 
 /// Scheduler that schedules task on current thread.
+#[derive(Clone)]
 pub struct InlineScheduler {}
 
 impl Scheduler for InlineScheduler {
