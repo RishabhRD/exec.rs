@@ -30,7 +30,7 @@ impl<V, E> Receiver for NotifyReceiver<V, E> {
 
     fn set_cancelled(&mut self) {
         let (lock, cvar) = &*self.shared_state;
-        *lock.lock().unwrap() = None;
+        *lock.lock().unwrap() = Some(None);
         cvar.notify_one();
     }
 }
