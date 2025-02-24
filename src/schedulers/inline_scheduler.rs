@@ -19,7 +19,7 @@ where
     }
 }
 
-pub struct InlineSender {}
+struct InlineSender {}
 
 impl Sender for InlineSender {
     type Value = ();
