@@ -70,6 +70,8 @@ where
 }
 
 /// Returns a sender which completes with value continuation(InternalSender::Value).
+///
+/// The resultant sender completes on scheduler where sender completes.
 pub fn then<InternalSender, Continuation, OutputValue>(
     sender: InternalSender,
     continuation: Continuation,

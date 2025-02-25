@@ -9,6 +9,8 @@ use crate::Sender;
 
 pub trait SenderExt: Sender + Sized {
     /// Returns a sender which completes with value continuation(InternalSender::Value).
+    ///
+    /// The resultant sender completes on scheduler where self completes.
     fn then<Continuation, OutputValue>(
         self,
         continuation: Continuation,
