@@ -3,7 +3,7 @@
 
 use crate::{Receiver, Sender};
 
-pub struct ThenReceiver<ExternalReceiver, InternalValue, ExternalValue, Operation>
+struct ThenReceiver<ExternalReceiver, InternalValue, ExternalValue, Operation>
 where
     ExternalReceiver: Receiver<Value = ExternalValue>,
     Operation: Fn(InternalValue) -> ExternalValue,
