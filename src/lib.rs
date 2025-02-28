@@ -16,7 +16,6 @@
 //! ```
 //!
 //! The above diagram shows the model for async task.
-
 #[doc(hidden)]
 pub mod core;
 #[doc(inline)]

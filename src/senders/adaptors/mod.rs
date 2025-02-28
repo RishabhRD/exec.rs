@@ -2,6 +2,7 @@
 // Copyright (c) 2025 Rishabh Dwivedi (rishabhdwivedi17@gmail.com)
 
 mod then;
+use let_value::LetValueSender;
 pub use then::then;
 use then::ThenSender;
 
@@ -22,6 +23,14 @@ pub trait SenderExt: Sender + Sized {
         Continuation: Fn(Self::Value) -> OutputValue,
     {
         then(self, continuation)
+    }
+
+    fn let_value<F, OutputSender>(self, continuation: F) -> LetValueSender<Self, F, OutputSender>
+    where
+        F: Fn(Self::Value) -> OutputSender,
+        OutputSender: Sender<Error = Self::Error>,
+    {
+        let_value(self, continuation)
     }
 }
 
