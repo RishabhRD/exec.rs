@@ -7,6 +7,7 @@ pub trait OperationState {
     ///
     /// # Precondition
     ///   - Called no more than 1 time.
+    ///   - self would not be moved after call to start is done.
     fn start(&mut self);
 }
 
