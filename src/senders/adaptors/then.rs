@@ -3,7 +3,7 @@
 
 use crate::{Receiver, Sender};
 
-struct ThenReceiver<ExternalReceiver, InternalValue, ExternalValue, Operation>
+pub struct ThenReceiver<ExternalReceiver, InternalValue, ExternalValue, Operation>
 where
     ExternalReceiver: Receiver<Value = ExternalValue>,
     Operation: Fn(InternalValue) -> ExternalValue,
@@ -56,7 +56,12 @@ where
 
     type Error = InternalSender::Error;
 
-    fn connect<R>(self, receiver: R) -> impl crate::OperationState
+    type OpState<R>
+        = InternalSender::OpState<ThenReceiver<R, InternalSender::Value, OutputValue, Operation>>
+    where
+        R: Receiver<Value = Self::Value, Error = Self::Error>;
+
+    fn connect<R>(self, receiver: R) -> Self::OpState<R>
     where
         R: crate::Receiver<Value = Self::Value, Error = Self::Error>,
     {

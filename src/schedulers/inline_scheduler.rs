@@ -3,7 +3,7 @@
 
 use crate::{OperationState, Receiver, Scheduler, Sender};
 
-struct InlineOperationState<R>
+pub struct InlineOperationState<R>
 where
     R: Receiver<Value = (), Error = ()>,
 {
@@ -27,7 +27,12 @@ impl Sender for InlineSender {
 
     type Error = ();
 
-    fn connect<R>(self, receiver: R) -> impl OperationState
+    type OpState<R>
+        = InlineOperationState<R>
+    where
+        R: Receiver<Value = Self::Value, Error = Self::Error>;
+
+    fn connect<R>(self, receiver: R) -> Self::OpState<R>
     where
         R: Receiver<Value = Self::Value, Error = Self::Error>,
     {

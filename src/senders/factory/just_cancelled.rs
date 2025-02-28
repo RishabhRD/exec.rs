@@ -3,7 +3,7 @@
 
 use crate::{OperationState, Receiver, Sender};
 
-struct JustCancelledOperationState<Receiver> {
+pub struct JustCancelledOperationState<Receiver> {
     pub receiver: Receiver,
 }
 
@@ -24,7 +24,12 @@ impl Sender for JustCancelledSender {
 
     type Error = ();
 
-    fn connect<R>(self, receiver: R) -> impl OperationState
+    type OpState<R>
+        = JustCancelledOperationState<R>
+    where
+        R: Receiver<Value = Self::Value, Error = Self::Error>;
+
+    fn connect<R>(self, receiver: R) -> Self::OpState<R>
     where
         R: Receiver<Value = Self::Value, Error = Self::Error>,
     {
