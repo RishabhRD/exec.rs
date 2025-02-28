@@ -4,7 +4,7 @@
 use crate::{OperationState, Receiver, Sender};
 
 pub struct JustCancelledOperationState<Receiver> {
-    pub receiver: Receiver,
+    pub receiver: Option<Receiver>,
 }
 
 impl<V, R> OperationState for JustCancelledOperationState<R>
@@ -12,7 +12,7 @@ where
     R: Receiver<Error = V>,
 {
     fn start(&mut self) {
-        self.receiver.set_cancelled();
+        self.receiver.take().unwrap().set_cancelled();
     }
 }
 
@@ -33,7 +33,9 @@ impl Sender for JustCancelledSender {
     where
         R: Receiver<Value = Self::Value, Error = Self::Error>,
     {
-        JustCancelledOperationState { receiver }
+        JustCancelledOperationState {
+            receiver: Some(receiver),
+        }
     }
 }
 

@@ -32,7 +32,7 @@ where
 {
     fn start(&mut self) {
         let let_rec = LetValueReceiver {
-            external_receiver: self.external_receiver.take(),
+            external_receiver: self.external_receiver.take().unwrap(),
             continuation: self.continuation.take().unwrap(),
             dummy: std::marker::PhantomData {},
             next_op_state: &mut self.second_op,
@@ -48,7 +48,7 @@ where
     ExternalReceiver: Receiver,
     ExternalSender: Sender<Value = ExternalReceiver::Value, Error = ExternalReceiver::Error>,
 {
-    external_receiver: Option<ExternalReceiver>,
+    external_receiver: ExternalReceiver,
     continuation: Continuation,
     next_op_state: *mut Option<ExternalSender::OpState<ExternalReceiver>>,
     dummy: std::marker::PhantomData<InternalValue>,
@@ -65,8 +65,8 @@ where
 
     type Error = ExternalReceiver::Error;
 
-    fn set_value(&mut self, value: Self::Value) {
-        let op = (self.continuation)(value).connect(self.external_receiver.take().unwrap());
+    fn set_value(self, value: Self::Value) {
+        let op = (self.continuation)(value).connect(self.external_receiver);
         unsafe {
             *self.next_op_state = Some(op);
             self.next_op_state
@@ -78,12 +78,12 @@ where
         }
     }
 
-    fn set_error(&mut self, error: Self::Error) {
-        self.external_receiver.take().unwrap().set_error(error);
+    fn set_error(self, error: Self::Error) {
+        self.external_receiver.set_error(error);
     }
 
-    fn set_cancelled(&mut self) {
-        self.external_receiver.take().unwrap().set_cancelled();
+    fn set_cancelled(self) {
+        self.external_receiver.set_cancelled();
     }
 }
 

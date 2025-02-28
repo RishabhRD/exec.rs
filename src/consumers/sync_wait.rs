@@ -16,19 +16,19 @@ impl<V, E> Receiver for NotifyReceiver<V, E> {
 
     type Error = E;
 
-    fn set_value(&mut self, value: Self::Value) {
+    fn set_value(self, value: Self::Value) {
         let (lock, cvar) = &*self.shared_state;
         *lock.lock().unwrap() = Some(Some(Ok(value)));
         cvar.notify_one();
     }
 
-    fn set_error(&mut self, error: Self::Error) {
+    fn set_error(self, error: Self::Error) {
         let (lock, cvar) = &*self.shared_state;
         *lock.lock().unwrap() = Some(Some(Err(error)));
         cvar.notify_one();
     }
 
-    fn set_cancelled(&mut self) {
+    fn set_cancelled(self) {
         let (lock, cvar) = &*self.shared_state;
         *lock.lock().unwrap() = Some(None);
         cvar.notify_one();

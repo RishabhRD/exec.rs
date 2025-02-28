@@ -23,16 +23,16 @@ where
 
     type Error = ExternalReceiver::Error;
 
-    fn set_value(&mut self, value: Self::Value) {
+    fn set_value(self, value: Self::Value) {
         let v: ExternalValue = (self.operation)(value);
         self.external_receiver.set_value(v);
     }
 
-    fn set_error(&mut self, error: Self::Error) {
+    fn set_error(self, error: Self::Error) {
         self.external_receiver.set_error(error);
     }
 
-    fn set_cancelled(&mut self) {
+    fn set_cancelled(self) {
         self.external_receiver.set_cancelled();
     }
 }

@@ -14,8 +14,6 @@ pub trait OperationState {
 /// This models the part of task which contains callback when task completes.
 ///
 /// A task can be completed with Value, Error or cancelled.
-/// One of the set_value, set_error, set_cancelled should be called only
-/// single time.
 pub trait Receiver {
     /// Type of value with which task can be completed.
     type Value;
@@ -24,13 +22,13 @@ pub trait Receiver {
     type Error;
 
     /// Callback for task, when it completes with value.
-    fn set_value(&mut self, value: Self::Value);
+    fn set_value(self, value: Self::Value);
 
     /// Callback for task, when it completes with error.
-    fn set_error(&mut self, error: Self::Error);
+    fn set_error(self, error: Self::Error);
 
     /// Callback for task, when it gets cancelled.
-    fn set_cancelled(&mut self);
+    fn set_cancelled(self);
 }
 
 /// This models the part of task which represents the work upon completion of

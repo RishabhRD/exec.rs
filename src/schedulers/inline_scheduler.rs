@@ -7,7 +7,7 @@ pub struct InlineOperationState<R>
 where
     R: Receiver<Value = (), Error = ()>,
 {
-    pub receiver: R,
+    pub receiver: Option<R>,
 }
 
 impl<R> OperationState for InlineOperationState<R>
@@ -15,7 +15,7 @@ where
     R: Receiver<Value = (), Error = ()>,
 {
     fn start(&mut self) {
-        self.receiver.set_value(());
+        self.receiver.take().unwrap().set_value(());
     }
 }
 
@@ -36,7 +36,9 @@ impl Sender for InlineSender {
     where
         R: Receiver<Value = Self::Value, Error = Self::Error>,
     {
-        InlineOperationState { receiver }
+        InlineOperationState {
+            receiver: Some(receiver),
+        }
     }
 }
 

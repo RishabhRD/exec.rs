@@ -5,7 +5,7 @@ use crate::{OperationState, Receiver, Sender};
 
 pub struct JustErrorOperationState<Error, Receiver> {
     pub error: Option<Error>,
-    pub receiver: Receiver,
+    pub receiver: Option<Receiver>,
 }
 
 impl<V, R> OperationState for JustErrorOperationState<V, R>
@@ -13,7 +13,10 @@ where
     R: Receiver<Error = V>,
 {
     fn start(&mut self) {
-        self.receiver.set_error(self.error.take().unwrap());
+        self.receiver
+            .take()
+            .unwrap()
+            .set_error(self.error.take().unwrap());
     }
 }
 
@@ -38,7 +41,7 @@ impl<Error> Sender for JustErrorSender<Error> {
     {
         JustErrorOperationState {
             error: Some(self.error),
-            receiver,
+            receiver: Some(receiver),
         }
     }
 }

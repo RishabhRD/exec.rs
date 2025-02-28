@@ -5,7 +5,7 @@ use crate::{OperationState, Receiver, Sender};
 
 pub struct JustOperationState<Value, Receiver> {
     pub value: Option<Value>,
-    pub receiver: Receiver,
+    pub receiver: Option<Receiver>,
 }
 
 impl<V, R> OperationState for JustOperationState<V, R>
@@ -13,7 +13,10 @@ where
     R: Receiver<Value = V>,
 {
     fn start(&mut self) {
-        self.receiver.set_value(self.value.take().unwrap());
+        self.receiver
+            .take()
+            .unwrap()
+            .set_value(self.value.take().unwrap());
     }
 }
 
@@ -38,7 +41,7 @@ impl<Value> Sender for JustSender<Value> {
     {
         JustOperationState {
             value: Some(self.value),
-            receiver,
+            receiver: Some(receiver),
         }
     }
 }
