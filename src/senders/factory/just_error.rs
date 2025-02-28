@@ -3,7 +3,7 @@
 
 use crate::{OperationState, Receiver, Sender};
 
-struct JustErrorOperationState<Error, Receiver> {
+pub struct JustErrorOperationState<Error, Receiver> {
     pub error: Option<Error>,
     pub receiver: Receiver,
 }
@@ -27,7 +27,12 @@ impl<Error> Sender for JustErrorSender<Error> {
 
     type Error = Error;
 
-    fn connect<R>(self, receiver: R) -> impl OperationState
+    type OpState<R>
+        = JustErrorOperationState<Error, R>
+    where
+        R: Receiver<Value = Self::Value, Error = Self::Error>;
+
+    fn connect<R>(self, receiver: R) -> Self::OpState<R>
     where
         R: Receiver<Value = Self::Value, Error = Self::Error>,
     {
