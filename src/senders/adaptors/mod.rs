@@ -5,6 +5,9 @@ mod then;
 pub use then::then;
 use then::ThenSender;
 
+mod let_value;
+pub use let_value::let_value;
+
 use crate::Sender;
 
 pub trait SenderExt: Sender + Sized {
