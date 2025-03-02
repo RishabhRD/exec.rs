@@ -42,26 +42,26 @@ where
     }
 }
 
-pub struct LetValueReceiver<InternalValue, ExternalSender, Continuation, ExternalReceiver>
+pub struct LetValueReceiver<FirstValue, SecondSender, Continuation, ExternalReceiver>
 where
-    Continuation: Fn(InternalValue) -> ExternalSender,
+    Continuation: Fn(FirstValue) -> SecondSender,
     ExternalReceiver: Receiver,
-    ExternalSender: Sender<Value = ExternalReceiver::Value, Error = ExternalReceiver::Error>,
+    SecondSender: Sender<Value = ExternalReceiver::Value, Error = ExternalReceiver::Error>,
 {
     external_receiver: ExternalReceiver,
     continuation: Continuation,
-    next_op_state: *mut Option<ExternalSender::OpState<ExternalReceiver>>,
-    dummy: std::marker::PhantomData<InternalValue>,
+    next_op_state: *mut Option<SecondSender::OpState<ExternalReceiver>>,
+    dummy: std::marker::PhantomData<FirstValue>,
 }
 
-impl<InternalValue, ExternalSender, Continuation, ExternalReceiver> Receiver
-    for LetValueReceiver<InternalValue, ExternalSender, Continuation, ExternalReceiver>
+impl<FirstValue, SecondSender, Continuation, ExternalReceiver> Receiver
+    for LetValueReceiver<FirstValue, SecondSender, Continuation, ExternalReceiver>
 where
-    Continuation: Fn(InternalValue) -> ExternalSender,
+    Continuation: Fn(FirstValue) -> SecondSender,
     ExternalReceiver: Receiver,
-    ExternalSender: Sender<Value = ExternalReceiver::Value, Error = ExternalReceiver::Error>,
+    SecondSender: Sender<Value = ExternalReceiver::Value, Error = ExternalReceiver::Error>,
 {
-    type Value = InternalValue;
+    type Value = FirstValue;
 
     type Error = ExternalReceiver::Error;
 
