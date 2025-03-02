@@ -1,6 +1,16 @@
 // SPDX-License-Identifier: MIT
 // Copyright (c) 2025 Rishabh Dwivedi (rishabhdwivedi17@gmail.com)
 
+//!
+//!   -------------------------------------------------------------------
+//!  |  ----------------------------------------                         |
+//!  | |             continuation               | connect                |
+//!  | |FirstSender -------------> SecondSender |--------ExternalReceiver|
+//!  |  ----------------------------------------                         |
+//!  |               LetValueSender                                      |
+//!   -------------------------------------------------------------------
+//!                             LetValueOpState
+
 use crate::{OperationState, Receiver, Sender};
 
 pub struct LetValueOpState<FirstSender, Continuation, SecondSender, ExternalReceiver>
