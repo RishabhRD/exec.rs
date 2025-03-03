@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["just","just_cancelled","just_error","let_value","sync_wait","then"],"struct":["InlineScheduler","NeverStopCallback","NeverStopToken"],"trait":["OperationState","Receiver","Scheduler","Sender","SenderExt","StopCallback","StopSource","StopToken"]};
