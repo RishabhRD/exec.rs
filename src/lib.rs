@@ -21,6 +21,11 @@ pub mod core;
 #[doc(inline)]
 pub use core::*;
 
+#[doc(hidden)]
+pub mod stop_token;
+#[doc(inline)]
+pub use stop_token::*;
+
 mod schedulers;
 pub use schedulers::*;
 
