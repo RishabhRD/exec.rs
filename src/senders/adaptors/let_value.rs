@@ -2,6 +2,7 @@
 // Copyright (c) 2025 Rishabh Dwivedi (rishabhdwivedi17@gmail.com)
 
 //!
+//! ```text
 //!   -------------------------------------------------------------------
 //!  |  ----------------------------------------                         |
 //!  | |             continuation               | connect                |
@@ -10,6 +11,7 @@
 //!  |               LetValueSender                                      |
 //!   -------------------------------------------------------------------
 //!                             LetValueOpState
+//! ```
 
 use crate::{OperationState, Receiver, Sender};
 
